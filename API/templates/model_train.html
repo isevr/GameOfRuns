@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Training Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Model Training Results</h1>
+        
+        <div class="alert alert-success" role="alert">
+            {{ training_result }}
+        </div>
+
+        <h2 class="my-4">Training Performance</h2>
+        <div>
+            <img src="/static/model_training_plots.png" alt="Model Training Plots" class="img-fluid">
+        </div>
+
+        <a href="/" class="btn btn-primary my-4">Back to Home</a>
+    </div>
+</body>
+</html>

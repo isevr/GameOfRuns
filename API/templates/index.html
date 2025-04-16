@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-upload {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            color: rgb(196, 47, 47);
+        }
+        .button-train {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            color: rgb(47, 122, 196);
+        }
+        .button-seqmin {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            color: rgb(73, 122, 62);
+        }
+        .button-opt {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            color: rgb(182, 98, 100);
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose an Option</h1>
+    <div class="button-container">
+        <button class="button button-upload" onclick="window.location.href='/upload'">Upload Data</button>
+        <button class="button button-train" onclick="window.location.href='/model_train'">Train Model</button>
+        <button class="button button-seqmin" onclick="runSequenceMining()">Sequence Mining</button>
+        <button class="button button-opt" onclick="window.location.href='/optimization'">Sequence Optimization</button>
+    </div>
+</body>
+<label for="team-select">Choose a team:</label>
+<select id="team-select">
+    <option value="DET">Detroit Pistons</option>
+    <option value="CLE">Cleveland Cavaliers</option>
+    <option value="NOP">New Orleans Pelicans</option>
+    <option value="WAS">Washington Wizards</option>
+    <option value="PHI">Philadelphia 76ers</option>
+    <option value="CHI">Chicago Bulls</option>
+    <option value="UTA">Utah Jazz</option>
+    <option value="CHO">Charlotte Hornets</option>
+    <option value="IND">Indiana Pacers</option>
+    <option value="DEN">Denver Nuggets</option>
+    <option value="NYK">New York Knicks</option>
+    <option value="SAS">San Antonio Spurs</option>
+    <option value="DAL">Dallas Mavericks</option>
+    <option value="LAC">LA Clippers</option>
+    <option value="MIN">Minnesota Timberwolves</option>
+    <option value="MEM">Memphis Grizzlies</option>
+    <option value="ATL">Atlanta Hawks</option>
+    <option value="MIA">Miami Heat</option>
+    <option value="OKC">Oklahoma City Thunder</option>
+    <option value="TOR">Toronto Raptors</option>
+    <option value="BRK">Brooklyn Nets</option>
+    <option value="GSW">Golden State Warriors</option>
+    <option value="LAL">Los Angeles Lakers</option>
+    <option value="POR">Portland Trail Blazers</option>
+    <option value="PHO">Phoenix Suns</option>
+    <option value="SAC">Sacramento Kings</option>
+    <option value="HOU">Houston Rockets</option>
+    <option value="MIL">Milwaukee Bucks</option>
+    <option value="ORL">Orlando Magic</option>
+    <option value="BOS">Boston Celtics</option>
+</select>
+
+<!-- <button onclick="runSequenceMining()">Run Sequence Mining</button> -->
+
+<script>
+    function runSequenceMining() {
+        const selectedTeam = document.getElementById('team-select').value;
+        window.location.href = `/sequence_mining?team=${selectedTeam}`;
+    }
+</script>
+
+</html>

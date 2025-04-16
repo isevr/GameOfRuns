@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Baseline Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="file"] {
+            font-size: 16px;
+            padding: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Data</h1>
+    <p>Select the CSV file to preprocess data.</p>
+    <form action="/preprocess" method="post" enctype="multipart/form-data">
+        <label for="file">Choose a CSV file:</label><br><br>
+        <input type="file" name="file" id="file" required><br><br>
+        <input type="submit" value="Preprocess Data">
+    </form>
+</body>
+</html>
