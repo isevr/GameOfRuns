@@ -1,9 +1,9 @@
 import pandas as pd
-import model.preprocessing_functions as pf
+from API.model.preprocessing_functions import Preprocessing
 
 def data_load(df):
     # df = pd.read_csv(data_path)
 
-    train = pf.Preprocessing(df)
+    train = Preprocessing(df)
     
     return train.preprocess()
