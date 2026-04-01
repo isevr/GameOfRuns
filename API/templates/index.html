@@ -60,7 +60,7 @@
         <button class="button button-upload" onclick="window.location.href='/upload'">Upload Data</button>
         <button class="button button-train" onclick="window.location.href='/model_train'">Train Model</button>
         <button class="button button-seqmin" onclick="runSequenceMining()">Sequence Mining</button>
-        <button class="button button-opt" onclick="window.location.href='/optimization'">Sequence Optimization</button>
+        <button class="button button-opt" onclick="runOptimizationForm()">Sequence Optimization</button>
     </div>
 </body>
 <label for="team-select">Choose a team:</label>
@@ -97,12 +97,15 @@
     <option value="BOS">Boston Celtics</option>
 </select>
 
-<!-- <button onclick="runSequenceMining()">Run Sequence Mining</button> -->
-
 <script>
     function runSequenceMining() {
         const selectedTeam = document.getElementById('team-select').value;
         window.location.href = `/sequence_mining?team=${selectedTeam}`;
+    }
+
+    function runOptimizationForm() {
+        const selectedTeam = document.getElementById('team-select').value;
+        window.location.href = `/optimization_form?team=${selectedTeam}`;
     }
 </script>
 

@@ -31,7 +31,7 @@ def model_training(data, labels):
     model.add(keras.layers.Dense(units=512, activation="relu"))
     model.add(keras.layers.Dense(units=2, activation="softmax"))
 
-    model.compile(loss="binary_crossentropy", metrics=['accuracy','precision','recall','f1_score'], optimizer='rmsprop')
+    model.compile(loss="binary_crossentropy", metrics=['accuracy','precision','recall','f1_score'], optimizer='rmsprop', jit_compile=False)
 
     history = model.fit(X, y, epochs=epochs, verbose=1, validation_split=0.2, callbacks=[early_stop])
 

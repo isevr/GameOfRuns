@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 
 # Load model and data
-model = tf.keras.models.load_model('runs_predictor.h5')
+model = tf.keras.models.load_model('runs_predictor.keras')
 X = pd.read_csv('data.csv')
 del X['Unnamed: 0']
 X = X.values.reshape(-1,20,10)

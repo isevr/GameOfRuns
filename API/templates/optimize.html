@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game of Runs - Sequence Optimization</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+    <h2>Scenario Optimizer</h2>
+    <p>Input up to 9 events. The AI will optimize the remaining events to trigger a scoring run.</p>
+    
+    <form action="/optimization?team={{ team }}" method="post" id="opt-form">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="event-table">
+                <thead>
+                    <tr>
+                        <th>Event #</th>
+                        <th>ShotDist</th>
+                        <th>Timeout</th>
+                        <th>Substitution</th>
+                        <th>Shooter</th>
+                        <th>Rebounder</th>
+                        <th>Blocker</th>
+                        <th>Fouler</th>
+                        <th>ReboundType</th>
+                        <th>ViolationPlayer</th>
+                        <th>FreeThrowShooter</th>
+                        <th>TurnoverPlayer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="event-row">
+                        <td>1</td>
+                        <td>
+                            <select name="ShotDist" class="form-select form-select-sm">
+                                <option value="nan">None</option>
+                                <option value="close">Close</option>
+                                <option value="mid">Mid</option>
+                                <option value="3pt">3pt</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="TimeoutTeam" class="form-select form-select-sm">
+                                <option value="nan">None</option>
+                                <option value="timeout_home">Home Timeout</option>
+                                <option value="timeout_away">Away Timeout</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Substitution" class="form-select form-select-sm">
+                                <option value="nan">None</option>
+                                <option value="sub_home">Home Sub</option>
+                                <option value="sub_away">Away Sub</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Shooter" class="form-select form-select-sm">
+                                <option value="nan">None</option>
+                                <option value="shooter_home">Home</option>
+                                <option value="shooter_away">Away</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Rebounder" class="form-select form-select-sm">
+                                <option value="nan">None</option>
+                                <option value="rebounder_home">Home</option>
+                                <option value="rebounder_away">Away</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Blocker" class="form-select form-select-sm">
+                                <option value="nan">None</option>
+                                <option value="blocker_home">Home</option>
+                                <option value="blocker_away">Away</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Fouler" class="form-select form-select-sm">
+                                <option value="nan">None</option>
+                                <option value="fouler_home">Home</option>
+                                <option value="fouler_away">Away</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="ReboundType" class="form-select form-select-sm">
+                                <option value="nan">None</option>
+                                <option value="offensive">Offensive</option>
+                                <option value="defensive">Defensive</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="ViolationPlayer" class="form-select form-select-sm">
+                                <option value="nan">None</option>
+                                <option value="violator_home">Home</option>
+                                <option value="violator_away">Away</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="FreeThrowShooter" class="form-select form-select-sm">
+                                <option value="nan">None</option>
+                                <option value="ft_home">Home</option>
+                                <option value="ft_away">Away</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="TurnoverPlayer" class="form-select form-select-sm">
+                                <option value="nan">None</option>
+                                <option value="to_player_home">Home</option>
+                                <option value="to_player_away">Away</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="button" class="btn btn-secondary mt-2" onclick="addRow()">Add Event</button>
+        <button type="submit" class="btn btn-primary mt-2">Optimize Missing Events</button>
+    </form>
+
+    <script>
+        function addRow() {
+            let table = document.getElementById("event-table").getElementsByTagName('tbody')[0];
+            if (table.rows.length < 9) {
+                let newRow = table.rows[0].cloneNode(true);
+                // Update the event number in the first column
+                newRow.cells[0].innerHTML = table.rows.length + 1;
+                // Reset all select dropdowns in the cloned row to 'nan' (None)
+                let selects = newRow.getElementsByTagName('select');
+                for(let i=0; i<selects.length; i++) {
+                    selects[i].value = 'nan';
+                }
+                table.appendChild(newRow);
+            } else {
+                alert("You can provide up to 9 events; the AI must optimize at least one.");
+            }
+        }
+    </script>
+</body>
+</html>

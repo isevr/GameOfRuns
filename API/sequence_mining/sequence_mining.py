@@ -44,8 +44,11 @@ def sequence_mining(team, opponent, df, curr_team):
         sorted_row_counts = sorted(row_counts.items(), key=lambda x: x[1], reverse=True)
         
         total_seqs = 0
-        for i in range(10):
+        for i in range(min(10, len(sorted_row_counts))):
             total_seqs += sorted_row_counts[i][1]
+            
+        if total_seqs == 0:
+            continue
 
         
         if sorted_row_counts:
@@ -54,8 +57,8 @@ def sequence_mining(team, opponent, df, curr_team):
         else:
             mc_row, max_count, sc_row, second_max_count = None, 0, None, 0
         
-        max_count_ratio = max_count / total_seqs
-        second_max_count_ratio = second_max_count / total_seqs
+        max_count_ratio = max_count / total_seqs if total_seqs > 0 else 0
+        second_max_count_ratio = second_max_count / total_seqs if total_seqs > 0 else 0
         
         mc_indices = event_len_df.apply(lambda row: tuple(row) == mc_row, axis=1)
         mc_indices = mc_indices[mc_indices].index.tolist()

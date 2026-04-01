@@ -1,5 +1,6 @@
 preprocessed_data/
 uploaded_files/
+encoders/
 code/
 journals/
 data/
@@ -8,3 +9,5 @@ images/
 team_runs/
 standings/
 arts/
+gor_env/
+__pycache__/

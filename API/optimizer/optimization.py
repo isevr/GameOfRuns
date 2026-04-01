@@ -7,8 +7,9 @@ from joblib import load
 
 
 class SequenceOptimization:
-    def __init__(self, model):
+    def __init__(self, model, encoder_dir):
         self.model = load_model(model)
+        self.encoder_dir = encoder_dir
         
     def loss(self, x_partial, x_missing):
         full_input = tf.concat([x_partial, x_missing], axis=0)  
@@ -60,17 +61,34 @@ class SequenceOptimization:
         return self.full, self.pred, self.confidence
     
     def decode(self, columns):
+        """
+        Converts the optimized numerical sequence back to original text labels.
+        """
+        # Reshape the optimized 'full' array back to (10 events, 11 features)
+        # self.full is (10, 11, 1) from opt_loop
+        flat_data = self.full.reshape(10, 11)
+        decoded_rows = []
 
-        full_df = pd.DataFrame(self.full.reshape(-1,110)).astype(int)
-        full_df.columns = columns
+        # Iterate through each of the 10 events
+        for event_idx in range(10):
+            event_row = {}
+            # Map each feature (column) to its corresponding encoder
+            for col_idx, col_name in enumerate(columns):
+                encoder_path = os.path.join(self.encoder_dir, f"{col_name}.joblib")
+                
+                if os.path.exists(encoder_path):
+                    le = load(encoder_path)
+                    val = int(flat_data[event_idx, col_idx])
+                    # Handle cases where the opt_loop might produce an index 
+                    # slightly out of the original encoder range due to clipping
+                    try:
+                        event_row[col_name] = le.inverse_transform([val])[0]
+                    except:
+                        event_row[col_name] = "Unknown"
+                else:
+                    event_row[col_name] = flat_data[event_idx, col_idx]
+            
+            decoded_rows.append(event_row)
 
-        # TODO: add encoders loading
-
-        rules = []
-        for encoder, column in zip(encoders, full_df.columns):
-            rules.append(encoder.inverse_transform(full_df[column])[0])
-
-        generated_rules = pd.DataFrame(rules).T
-        generated_rules.columns = columns
-
+        generated_rules = pd.DataFrame(decoded_rows)
         return generated_rules
