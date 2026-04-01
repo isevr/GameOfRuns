@@ -121,9 +121,7 @@
             let table = document.getElementById("event-table").getElementsByTagName('tbody')[0];
             if (table.rows.length < 9) {
                 let newRow = table.rows[0].cloneNode(true);
-                // Update the event number in the first column
                 newRow.cells[0].innerHTML = table.rows.length + 1;
-                // Reset all select dropdowns in the cloned row to 'nan' (None)
                 let selects = newRow.getElementsByTagName('select');
                 for(let i=0; i<selects.length; i++) {
                     selects[i].value = 'nan';
